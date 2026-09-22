@@ -13,19 +13,20 @@ NOT an ESE / enforcement runtime and it is NOT a product. It is NOT a live
 integration: it makes no AWS call, no OpenAI call, no Bedrock API call, reads no
 credentials and no environment, and touches no network. It reads one public-safe
 SYNTHETIC Bedrock/OpenAI custody/audit input file and emits one ARCS SRS
-*envelope* receipt that carries the audit evidence as a GARP body under
-``extensions.garp.body``.
+*envelope* receipt that carries the audit evidence as a DAGR body under the
+legacy compatibility path ``extensions.garp.body``.
 
 What it does:
   * computes the sha256 of the exact input bytes and records it under
     ``extensions.garp.body.artifact_hashes`` (the receipt binds the input
     cryptographically),
-  * maps the recorded model-invocation custody events into a GARP body whose
+  * maps the recorded model-invocation custody events into a DAGR body whose
     ``body_kind`` names the shape (``bedrock_openai_custody_audit``),
   * carries any decision via ``decision_ref`` (a reference) and NEVER as a
     body-level or top-level ``verdict`` / ``status`` / ``disposition`` /
     ``decision`` / ``governance_state``. This preserves Option A
-    (decision_ref) as recorded in garp-ops PR #87 and garp-sdk PR #78.
+    (decision_ref) as recorded by historical provenance pins garp-ops PR #87
+    and garp-sdk PR #78.
 
 What it does NOT do:
   * it does not assert that any recorded event is true, that any invocation was
@@ -37,7 +38,8 @@ Determinism: output is ``json.dumps(..., indent=2, sort_keys=True)`` plus a
 trailing newline, with ``issued_at`` and ``receipt_id`` derived only from the
 input bytes/fields (no wall clock, no randomness), so regenerating from the same
 input reproduces byte-identical output. Standard library only; imports no
-garp_sdk, arcs_amnesiac, or other Vega/GARP product code.
+the legacy ``garp_sdk`` compatibility package, ``arcs_amnesiac``, or other
+DAGR product code.
 """
 
 from __future__ import annotations

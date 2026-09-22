@@ -4,15 +4,17 @@ body_kind Extension Rules
 Status: enforced by the vendored canonical validator.
 
 This pack proves ARCS SRS **envelope** conformance only. It does not bless any
-GARP body-kind semantics. This document states where GARP body content is
+DAGR body-kind semantics. This document states where DAGR body content is
 allowed to live and how the envelope refuses the shapes that would smuggle body
-semantics into the envelope.
+semantics into the envelope. `extensions.garp.*` is a frozen legacy wire
+namespace, not active GARP product branding; see
+`LEGACY_COMPATIBILITY_IDENTIFIERS.md`.
 
-1. GARP body content lives under `extensions.garp.body`
+1. DAGR body content uses legacy `extensions.garp.body`
 -------------------------------------------------------
 
-GARP body-kind content — including `body_kind` and its detail — lives **only**
-under `extensions.garp.body`. It is **never**:
+DAGR body-kind content — including `body_kind` and its detail — lives **only**
+under the compatibility path `extensions.garp.body`. It is **never**:
 
 - a top-level `body`, and
 - never selected by a top-level `body_kind`.
@@ -22,11 +24,11 @@ The canonical envelope carries no top-level `schema_version` and no top-level
 SRS envelope and is rejected.
 
 A real, committed example is the vendored
-`fixtures/valid/compression_disposition.envelope.json`: it carries a full GARP
+`fixtures/valid/compression_disposition.envelope.json`: it carries a full DAGR
 body — `body_kind`, `retained_claims`, `refused_candidates`,
 `omitted_candidates`, `candidate_total`, `artifact_hashes` — entirely nested
 under `extensions.garp.body`. Its inclusion demonstrates that a valid ARCS
-envelope can transport a GARP body; it blesses nothing about that body.
+envelope can transport a DAGR body; it blesses nothing about that body.
 
 2. What the validator refuses
 -----------------------------
@@ -34,7 +36,7 @@ envelope can transport a GARP body; it blesses nothing about that body.
 `tools/validate_srs_envelope.py` enforces the following envelope-only
 guardrails on top of schema validation:
 
-- **GARP detail at the top level is rejected.** The keys `body_kind`,
+- **DAGR body detail at the top level is rejected.** The keys `body_kind`,
   `retained_claims`, `refused_candidates`, `omitted_candidates`,
   `candidate_total`, and `artifact_hashes` are legitimate only under
   `extensions.garp.body`; at the top level they raise
@@ -46,7 +48,7 @@ guardrails on top of schema validation:
   `verdict`, `admitted`, `refused`, `held`, or `status` used as a body verdict
   raises `TOP_LEVEL_BODY_VERDICT`; the envelope never carries a body verdict.
   See `fixtures/invalid/top_level_verdict_discriminator.json`.
-- **If `extensions.garp` is present, it must nest detail under
+- **If the legacy `extensions.garp` namespace is present, it must nest detail under
   `extensions.garp.body`** (`GARP_NOT_UNDER_BODY`).
 - **`receipt_type` must be in the closed enum** `sdk_enforcement`,
   `grace_session`, `connection`, `provenance` (`RECEIPT_TYPE_NOT_IN_ENUM`).

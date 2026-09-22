@@ -15,7 +15,7 @@ Status: first public local validation command (Stage C4).
 > historical reference only.
 
 This document describes `validator/validate_receipt_envelope_v0_1.py`, the
-first public local validation command for the GARP/SRS receipt conformance
+first public local validation command for the DAGR/SRS receipt conformance
 pack, and the expected pass/fail outputs committed alongside it.
 
 1. How to run the validator

@@ -21,7 +21,8 @@ What this pack is
 It takes one **explicit, public-safe, synthetic** Bedrock/OpenAI
 **model-invocation custody/audit input file** and builds one ARCS SRS
 **envelope** receipt from it with a minimal, deterministic adapter. The receipt
-carries the audit evidence as a GARP body under `extensions.garp.body`, and the
+carries the audit evidence as a DAGR body under the legacy compatibility path
+`extensions.garp.body`, and the
 pack proves that the receipt validates against the canonical SRS envelope schema
 already vendored/reconciled in this repo.
 
@@ -112,7 +113,8 @@ integrity only**:
 
 - **structural**: the receipt is a well-formed ARCS SRS envelope under the
   canonical schema (`schemas/srs-envelope/v0.1.0/`, pinned digest
-  `e866eabf…d6b61`), with all GARP body content under `extensions.garp.body`.
+  `e866eabf…d6b61`), with all DAGR body content under legacy
+  `extensions.garp.body`.
 - **cryptographic**: the receipt binds the exact input bytes — the sha256 in
   `extensions.garp.body.artifact_hashes` equals the sha256 of the input file —
   and regenerates byte-identically from that input.
@@ -159,15 +161,16 @@ Envelope shape (required invariants — identical to the neutral pack)
   string; see this repo's `boundary_type` posture note for the ratification that
   this value is accepted as pack-local descriptive and does not mint a canonical
   registry entry.)
-- **GARP body content lives under `extensions.garp.body`**, named by `body_kind`
+- **DAGR body content uses legacy `extensions.garp.body`**, named by `body_kind`
   (`bedrock_openai_custody_audit`). Hoisting any of it to the top level is
   rejected by the canonical validator (see `docs/BODY_KIND_EXTENSION_RULES.md`).
 
 Option A / `decision_ref` (preserved)
 -------------------------------------
 
-This pack preserves **Option A** as recorded in **garp-ops PR #87** (R0/R1
-Option A) and **garp-sdk PR #78** (admission receipt contract conformed to
+This pack preserves **Option A** as recorded in the historical provenance
+identifiers **garp-ops PR #87** (R0/R1 Option A) and **garp-sdk PR #78**
+(admission receipt contract conformed to
 Option A / `decision_ref`):
 
 - Any decision/verdict semantics are carried as a **reference** —
@@ -189,4 +192,6 @@ Relationship to the neutral pack
 pack is its first vendor-specific instantiation. The discipline is unchanged;
 only the input is vendor-shaped (a Bedrock/OpenAI model-invocation custody/audit
 trail) and the `body_kind` names that shape. No invariant above is weakened, and
-no garp-sdk code is imported or vendored.
+no DAGR SDK code is imported or vendored. The old `garp-sdk` spelling above is
+retained only where it identifies a historical provenance pin or compatibility
+import checked by the standalone verifier.

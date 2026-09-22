@@ -1,9 +1,9 @@
-GARP Receipt Conformance
+DAGR Receipt Conformance
 ========================
 
 Status: faithful, digest-pinned vendoring of the canonical ARCS SRS envelope.
 
-This repository is the standalone public conformance-pack target for GARP/SRS
+This repository is the standalone public conformance-pack target for DAGR/SRS
 receipt externalization. It is a **byte-identical mirror** of the canonical ARCS
 SRS envelope schema **v0.1.0** — the schema carried by receipts that declare
 `receipt_version: "srs.core.v5.1"` — together with the canonical validator,
@@ -39,12 +39,14 @@ Source of truth and pin
 What this pack proves
 ---------------------
 
-ARCS SRS **envelope** conformance only. It does **not** prove GARP body-kind
-conformance, does **not** bless any GARP body semantics, and does **not** assert
+ARCS SRS **envelope** conformance only. It does **not** prove DAGR body-kind
+conformance, does **not** bless any DAGR body semantics, and does **not** assert
 truth, admission, custody, or public-surface eligibility of anything a receipt
-carries. GARP body content lives only under `extensions.garp.body`; it is never
-a top-level `body` with a top-level `body_kind` (see
-`docs/BODY_KIND_EXTENSION_RULES.md`).
+carries. DAGR body content uses the frozen legacy compatibility namespace
+`extensions.garp.body`; it is never a top-level `body` with a top-level
+`body_kind` (see `docs/BODY_KIND_EXTENSION_RULES.md`). The GARP spelling in
+that wire path is intentionally preserved and is not the active product name.
+See `docs/LEGACY_COMPATIBILITY_IDENTIFIERS.md` for the complete rename boundary.
 
 Pack contents
 -------------

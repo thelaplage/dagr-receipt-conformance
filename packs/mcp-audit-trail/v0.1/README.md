@@ -11,7 +11,8 @@ What this pack is
 It takes one **explicit, public-safe** MCP (Model Context Protocol)
 custody-gateway **audit-trail input file** and builds one ARCS SRS **envelope**
 receipt from it with a minimal, deterministic adapter. The receipt carries the
-audit evidence as a GARP body under `extensions.garp.body`, and the pack proves
+audit evidence as a DAGR body under the legacy compatibility path
+`extensions.garp.body`, and the pack proves
 that the receipt validates against the canonical SRS envelope schema already
 vendored/reconciled in this repo.
 
@@ -45,7 +46,8 @@ integrity only**:
 
 - **structural**: the receipt is a well-formed ARCS SRS envelope under the
   canonical schema (`schemas/srs-envelope/v0.1.0/`, pinned digest
-  `e866eabf…d6b61`), with all GARP body content under `extensions.garp.body`.
+  `e866eabf…d6b61`), with all DAGR body content under legacy
+  `extensions.garp.body`.
 - **cryptographic**: the receipt binds the exact input bytes — the sha256 in
   `extensions.garp.body.artifact_hashes` equals the sha256 of the input file —
   and regenerates byte-identically from that input.
@@ -85,15 +87,16 @@ Envelope shape (required invariants)
   precisely because the field is open — it mints nothing canonical. `check.sh`
   carries a posture guard that fails loudly if that open-string posture ever
   changes. See `docs/BOUNDARY_TYPE_POSTURE.md` for the full ratification.
-- **GARP body content lives under `extensions.garp.body`**, named by `body_kind`
+- **DAGR body content uses legacy `extensions.garp.body`**, named by `body_kind`
   (`mcp_audit_trail`). Hoisting any of it to the top level is rejected by the
   canonical validator (see `docs/BODY_KIND_EXTENSION_RULES.md`).
 
 Option A / `decision_ref` (preserved)
 -------------------------------------
 
-This pack preserves **Option A** as recorded in **garp-ops PR #87** (R0/R1
-Option A) and **garp-sdk PR #78** (admission receipt contract conformed to
+This pack preserves **Option A** as recorded in the historical provenance
+identifiers **garp-ops PR #87** (R0/R1 Option A) and **garp-sdk PR #78**
+(admission receipt contract conformed to
 Option A / `decision_ref`):
 
 - Any decision/verdict semantics are carried as a **reference** —

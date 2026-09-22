@@ -31,8 +31,10 @@ checks continue to pass exactly as released.
 -----------------------
 
 `receipt-envelope-compression-disposition-v0.1.1.json` is a single, valid,
-public-safe receipt envelope whose `body_kind` candidate is the GARP
-compression-disposition disposition body. It exercises the **envelope FORM**
+public-safe receipt envelope whose `body_kind` candidate is the historical
+GARP-origin compression-disposition body. The GARP spelling here and in the
+example values is a legacy compatibility/provenance identifier, not active
+product branding. It exercises the **envelope FORM**
 only — the same surface the minimal fixture exercises — while carrying a body
 payload whose internal field shape mirrors the pinned source renderer for
 fidelity.
@@ -95,12 +97,12 @@ diffed by `scripts/check_pack_v0_1.sh`.
 3. Divergence A — envelope wrapper placement
 --------------------------------------------
 
-The conformance pack envelope and the pinned GARP renderer place `body_kind`
-differently:
+The conformance pack envelope and the pinned historical GARP renderer place
+`body_kind` differently:
 
 - **Conformance pack envelope** (this fixture, what the pack validates): carries
   `body_kind` at the **top level** and treats `body` as an opaque object.
-- **Pinned GARP renderer** (the source, §6): reads the body at
+- **Pinned historical GARP renderer** (the provenance source, §6): reads the body at
   `extensions.garp.body` and dispatches on a `body_kind` carried **inside that
   body**.
 
@@ -175,9 +177,9 @@ schema.
 6. Provenance
 -------------
 
-The body field shape and synthetic values mirror the pinned GARP-side source
-renderer and its full-body test fixture, as drafted and source-traced in the
-garp-ops control-plane note
+The body field shape and synthetic values mirror the pinned historical
+GARP-side source renderer and its full-body test fixture, as drafted and
+source-traced in the legacy `garp-ops` control-plane note
 `IN___GARP_Compression_Disposition_Fixture_Shape_Draft_JUN01` (which composes
 with the #80 source/provenance pin). The source is a read-only, deterministic,
 stdlib-only renderer — not a schema, validator, or receipt emitter. This fixture

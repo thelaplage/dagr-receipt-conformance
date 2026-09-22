@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# check_pack_v0_1.sh — clean-checkout verification for the GARP/SRS receipt
+# check_pack_v0_1.sh — clean-checkout verification for the DAGR/SRS receipt
 # envelope conformance pack.
 #
 # This pack is a faithful, digest-pinned vendoring of the canonical ARCS SRS
 # envelope schema, manifest, and validator from arcs-srs, plus the canonical
 # conformance fixtures. It validates ARCS SRS *envelope* form only; it does not
-# bless GARP body-kind semantics. See README.md and docs/ for what this does and
+# bless DAGR body-kind semantics. See README.md and docs/ for what this does and
 # does not establish.
 #
 # Runs end-to-end from a clean checkout using only the Python 3 standard library

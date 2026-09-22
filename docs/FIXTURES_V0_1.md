@@ -19,15 +19,15 @@ access (see `NO_PRIVATE_CORPUS.md`).
 --------------------------
 
 One minimal valid receipt per closed `receipt_type` enum value, plus one real
-envelope that transports a GARP body:
+envelope that transports a DAGR body through the frozen legacy wire namespace:
 
 - `fixtures/valid/sdk_enforcement.minimal.json`
 - `fixtures/valid/grace_session.minimal.json`
 - `fixtures/valid/connection.minimal.json`
 - `fixtures/valid/provenance.minimal.json`
 - `fixtures/valid/compression_disposition.envelope.json` — a real, committed
-  ARCS envelope carrying a full GARP body **under `extensions.garp.body`**. It
-  is present as an **envelope-conformance fixture only**; it is not a GARP
+  ARCS envelope carrying a full DAGR body **under the compatibility path
+  `extensions.garp.body`**. It is present as an **envelope-conformance fixture only**; it is not a DAGR
   body-kind conformance target and its inclusion blesses nothing about that
   body.
 
@@ -42,7 +42,8 @@ Each fails for exactly one stated envelope-level reason:
   `attestation_limits` absent.
 - `fixtures/invalid/missing_artifact_classes_excluded.json` — required
   `artifact_classes_excluded` absent.
-- `fixtures/invalid/garp_detail_at_top_level.json` — GARP body detail
+- `fixtures/invalid/garp_detail_at_top_level.json` — DAGR body detail (the
+  filename is a frozen legacy compatibility identifier)
   (`body_kind`, `retained_claims`) hoisted to the top level instead of living
   under `extensions.garp.body`. **This is the drift-form fixture**: it proves
   the reconciled pack actively refuses the shape that caused the schema drift.
@@ -77,7 +78,7 @@ by running the vendored canonical validator against each fixture.
 
 These fixtures do not, by themselves:
 
-- prove GARP body-kind conformance or bless any GARP body semantics,
+- prove DAGR body-kind conformance or bless any DAGR body semantics,
 - assert truth, admission, custody, or public-surface eligibility of any body,
 - claim any external adoption,
 - depend on any private corpus, private repository, or internal runtime state.

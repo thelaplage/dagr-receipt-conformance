@@ -26,8 +26,8 @@ with nothing more than a stock Python 3 interpreter and standard POSIX tooling.
 From a clean checkout, at the repository root:
 
 ```
-git clone <this-repo-url> garp-receipt-conformance
-cd garp-receipt-conformance
+git clone <this-repo-url> dagr-receipt-conformance
+cd dagr-receipt-conformance
 bash scripts/check_pack_v0_1.sh
 ```
 

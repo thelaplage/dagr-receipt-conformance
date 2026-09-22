@@ -62,8 +62,10 @@ string or a structured object). The canonical schema sets
 `additionalProperties: true`; this quirk is preserved exactly as vendored.
 
 Crucially, the envelope carries **no** top-level `schema_version` and **no**
-top-level `body`. GARP body content lives only under `extensions.garp.body`
-(see `BODY_KIND_EXTENSION_RULES.md`).
+top-level `body`. DAGR body content lives only under the frozen legacy
+compatibility path `extensions.garp.body` (see
+`BODY_KIND_EXTENSION_RULES.md`). The schema's GARP-spelled `$id` is also a
+released compatibility identifier and remains byte-stable.
 
 3. What this schema does NOT validate
 -------------------------------------
@@ -71,7 +73,7 @@ top-level `body`. GARP body content lives only under `extensions.garp.body`
 The schema validates envelope form, not substance. In particular it does not
 validate or prove:
 
-- GARP body-kind conformance or any GARP body semantics,
+- DAGR body-kind conformance or any DAGR body semantics,
 - truth, correctness, admission, custody, or completeness of the receipt,
 - public-surface eligibility of anything a receipt carries,
 - absence of private-corpus leakage,
@@ -101,7 +103,7 @@ re-vendored, rather than by mutating this one.
 - validates a receipt against the envelope schema (a small built-in subset
   check: type / required / enum / items / oneOf / properties),
 - enforces envelope-only guardrails (closed `receipt_type` enum, required
-  fields present, GARP detail only under `extensions.garp.body`, no top-level
+  fields present, DAGR detail only under legacy `extensions.garp.body`, no top-level
   `receipt_class`, no top-level body verdict/discriminator).
 
 `scripts/check_pack_v0_1.sh` runs the validator against every vendored fixture

@@ -1,4 +1,4 @@
-GARP Receipt Conformance Pack Structure
+DAGR Receipt Conformance Pack Structure
 =======================================
 
 Status: faithful, digest-pinned vendoring of the canonical ARCS SRS envelope
@@ -33,7 +33,8 @@ scripts/
 
 docs/
   SCHEMA_V0_1.md                      vendored schema + pin
-  BODY_KIND_EXTENSION_RULES.md        GARP body lives under extensions.garp.body
+  BODY_KIND_EXTENSION_RULES.md        DAGR body uses legacy extensions.garp.body
+  LEGACY_COMPATIBILITY_IDENTIFIERS.md rename boundary for frozen GARP identifiers
   FIXTURES_V0_1.md                    the vendored fixtures
   FIXTURE_PROVENANCE.md               provenance rules for all vendored artifacts
   PACK_STRUCTURE.md                   this file
@@ -69,6 +70,6 @@ Non-claim
 ---------
 
 This pack proves ARCS SRS **envelope** conformance only. It does not publish an
-independent schema, does not bless GARP body-kind semantics, and does not assert
+independent schema, does not bless DAGR body-kind semantics, and does not assert
 truth, admission, custody, or public-surface eligibility of anything a receipt
 carries.

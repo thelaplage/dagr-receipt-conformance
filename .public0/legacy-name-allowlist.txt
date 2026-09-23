@@ -1,0 +1,3 @@
+# README.md lines carrying intentionally preserved legacy compatibility identifiers.
+46  # extensions.garp.body frozen wire namespace
+47  # explanatory GARP spelling for that frozen namespace
